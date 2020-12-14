@@ -10,6 +10,7 @@ const { PythonShell } = require('python-shell');
 
 //Router to handle the incoming request. 
 app.get("/", (req, res, next) => {
+    const params = req.params;
     //Here are the option object in which arguments can be passed for the python_test.js. 
     let options = {
         mode: 'text',

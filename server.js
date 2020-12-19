@@ -1,15 +1,25 @@
-//Import express.js module and create its variable. 
+//Import express.js module and create its variable + body-parser.
+const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 
-//  8000 and can be accessed through localhost:8000 
-const PORT = process.env.PORT || 8000;
+//  8000 and can be accessed through localhost:5000 
+const PORT = process.env.PORT || 5000;
 
 //Import PythonShell module. 
 const { PythonShell } = require('python-shell');
 
+// Body-Parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.get('/api/hello', (req, res) => {
+    res.send({ express: 'Hello From Express' });
+});
+
 //Router to handle the incoming request. 
-app.get("/", (req, res, next) => {
+app.post("/api/execute-script", (req, res, next) => {
+    const params = req.params;
     //Here are the option object in which arguments can be passed for the python_test.js. 
     let options = {
         mode: 'text',
@@ -29,6 +39,16 @@ app.get("/", (req, res, next) => {
         res.send(vj)
     });
 });
+
+if (process.env.NODE_ENV === 'production') {
+    // Serve any static files
+    app.use(express.static(path.join(__dirname, 'client/build')));
+
+    // Handle React routing, return all requests to React app
+    app.get('*', function (req, res) {
+        res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+    });
+}
 
 // Creates the server on port. localhost:PORT
 app.listen(PORT, () => {

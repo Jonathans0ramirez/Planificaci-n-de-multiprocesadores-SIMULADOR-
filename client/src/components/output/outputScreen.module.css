@@ -1,13 +1,13 @@
 pre {
-    margin: 0;
+    margin: 0 !important;
 }
 
 .output {
     background-color: black;
     background-image: radial-gradient(
-        rgba(0, 150, 0, 0.75), black 120%
+        #007896bf, black 120%
     );
-    height: 100vh;
+    width: 100%;
     margin: 0;
     overflow: hidden;
     padding: 2rem;

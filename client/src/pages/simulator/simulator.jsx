@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import {
     PageHeader,
     Typography,
+    Button,
     Tag,
     Row
 } from 'antd';
@@ -20,10 +21,9 @@ import simu from './simulator.module.css';
 const { Paragraph } = Typography;
 
 const IconLink = ({ src, text }) => (
-    <a className={simu['example-link']}>
-        <img className={simu['example-link-icon']} src={src} alt={text} />
-        {text}
-    </a>
+    <Button className={simu['link']} type="link">
+        <span><img className={simu['link-icon']} src={src} alt={text} /></span>{text}
+    </Button>
 );
 
 const content = (
@@ -69,7 +69,7 @@ const Content = ({ children, extraContent, text }) => (
 );
 
 const Simulator = () => {
-    const [text, setText] = useState('NO ME PARECE');
+    const [text] = useState('NO ME PARECE');
     return (
         <PageHeader
             title="Planificación de multiprocesadores"

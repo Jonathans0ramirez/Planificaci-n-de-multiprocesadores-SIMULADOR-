@@ -1,6 +1,7 @@
 //Import express.js module and create its variable + body-parser.
 const bodyParser = require('body-parser');
 const express = require('express');
+const path = require('path');
 const app = express();
 
 //  8000 and can be accessed through localhost:5000 

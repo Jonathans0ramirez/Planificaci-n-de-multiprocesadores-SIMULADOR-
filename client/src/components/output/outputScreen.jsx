@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classes from './outputScreen.module.css';
 
-const OutputScreen = () => {
-    const [magic, setMagic] = useState("NO ME PARECE");
+const OutputScreen = ({ text }) => {
+    const [magic, setMagic] = useState("");
+
+    useEffect(() => {
+        setMagic(`> ${text}`);
+    }, [text]);
 
     return (
         <div className={classes.output}>

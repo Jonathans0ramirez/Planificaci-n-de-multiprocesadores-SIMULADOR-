@@ -1,0 +1,29 @@
+.image {
+    margin: 0 0 0 60px;
+    display: flex;
+    align-items: center;
+}
+  
+.link {
+    padding: 0px 15px 4px 0px;
+}
+
+[data-theme='compact'] .link {
+    line-height: 20px;
+}
+
+.link-icon {
+    margin-right: 8px;
+}
+
+[data-theme='compact'] .link-icon {
+    width: 20px;
+    height: 20px;
+}
+  
+@media (max-width: 768px) {
+    .image {
+      flex: 100%;
+      margin: 24px 0 0;
+    }
+}

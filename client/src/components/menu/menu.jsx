@@ -9,8 +9,8 @@ import menuCss from './menu.module.css';
 
 const { Paragraph } = Typography;
 
-const IconButton = ({ src, text }) => (
-    <Button className={menuCss['link']} type="link">
+const IconButton = ({ src, text, onClickBtn }) => (
+    <Button className={menuCss['link']} type="link" onClick={onClickBtn}>
         <span>
             <img className={menuCss['link-icon']} src={src} alt={text} />
         </span>
@@ -25,7 +25,7 @@ const ContentMenu = ({ children, extraContent }) => (
     </>
 )
 
-const Menu = ({ paragraphs, outputText, setOutputText, iconButtonObj }) => {
+const Menu = ({ paragraphs, outputText, setOutputText, iconButtonObj, onClickBtn }) => {
 
     const contenido = (
         <>
@@ -42,6 +42,7 @@ const Menu = ({ paragraphs, outputText, setOutputText, iconButtonObj }) => {
                         key={index}
                         text={ib.text}
                         src={ib.src ? ib.src : ""}
+                        onClickBtn={onClickBtn}
                     />
                 })
             }
@@ -50,13 +51,13 @@ const Menu = ({ paragraphs, outputText, setOutputText, iconButtonObj }) => {
 
     return (
         <ContentMenu
-        extraContent={
-            <img
-                src="https://gw.alipayobjects.com/zos/antfincdn/K%24NnlsB%26hz/pageHeader.svg"
-                alt="content"
-                width="100%"
-            />
-        }
+            extraContent={
+                <img
+                    src="https://gw.alipayobjects.com/zos/antfincdn/K%24NnlsB%26hz/pageHeader.svg"
+                    alt="content"
+                    width="100%"
+                />
+            }
         >
             {contenido}
         </ContentMenu>

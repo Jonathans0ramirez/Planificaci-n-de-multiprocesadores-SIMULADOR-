@@ -1,4 +1,5 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useRef } from 'react';
+import { Transition } from 'react-transition-group';
 import {
     PageHeader,
     Tag,
@@ -21,7 +22,21 @@ import {
 import 'antd/dist/antd.css';
 import './simulator.module.css';
 
-const Content = ({ text, setText }) => (
+const duration = 300;
+
+const defaultStyle = {
+    transition: `opacity ${duration}ms ease-in-out`,
+    opacity: 0,
+}
+
+const transitionStyles = {
+    entering: { opacity: 1 },
+    entered: { opacity: 1 },
+    exiting: { opacity: 0 },
+    exited: { opacity: 0 },
+};
+
+const Content = ({ text, setText, onClickBtn, nodeRef }) => (
     <Fragment>
         <Row style={{ padding: '20px 37px', border: '1px solid black' }}>
             <Menu
@@ -29,18 +44,30 @@ const Content = ({ text, setText }) => (
                 iconButtonObj={menuIconButtons}
                 text={text}
                 setOutputText={setText}
+                onClickBtn={onClickBtn}
             />
         </Row>
-        {
-            text && <Row>
-                <OutputScreen text={text} />
-            </Row>
-        }
+        <Transition in={text ? true : false} timeout={duration} nodeRef={nodeRef}>
+            {state => (
+                <Row style={{
+                    ...defaultStyle,
+                    ...transitionStyles[state]
+                }}>
+                    <OutputScreen text={text} />
+                </Row>
+            )}
+        </Transition>
     </Fragment>
 );
 
 const Simulator = () => {
-    const [text, setText] = useState('NO ME PARECE');
+    const nodeRef = useRef(null)
+    const [text, setText] = useState('');
+
+    const handleToggle = (e) => {
+        text ? setText('') : setText('No me parece');
+    }
+
     return (
         <PageHeader
             title="Planificación de multiprocesadores"
@@ -60,6 +87,8 @@ const Simulator = () => {
             <Content
                 text={text}
                 setText={setText}
+                onClickBtn={handleToggle}
+                nodeRef={nodeRef}
             >
             </Content>
         </PageHeader>

@@ -20,13 +20,14 @@ app.get('/api/hello', (req, res) => {
 
 //Router to handle the incoming request. 
 app.post("/api/execute-script", (req, res, next) => {
-    const params = req.params;
+    const params = req.body.params;
     //Here are the option object in which arguments can be passed for the python_test.js. 
     let options = {
         mode: 'text',
         pythonOptions: ['-u'], // get print results in real-time 
         scriptPath: './scripts', //If you are having python_test.py script in same folder, then it's optional. 
-        args: ['-n', '1', '-L', 'a:30:200', '-M', '300', '-c', '-T'] //An argument which can be accessed in the script using sys.argv[1] 
+        //args: ['-n', '1', '-L', 'a:30:200', '-M', '300', '-c', '-T'] //An argument which can be accessed in the script using sys.argv[1] 
+        args: [params] //An argument which can be accessed in the script using sys.argv[1] 
     };
 
 

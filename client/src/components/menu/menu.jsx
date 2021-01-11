@@ -6,6 +6,7 @@ import {
 
 import 'antd/dist/antd.css';
 import menuCss from './menu.module.css';
+import SimulatorBuilder from '../simulatorBuilder/simulatorBuilder';
 
 const { Paragraph } = Typography;
 
@@ -25,16 +26,19 @@ const ContentMenu = ({ children, extraContent }) => (
     </>
 )
 
-const Menu = ({ paragraphs, outputText, setOutputText, iconButtonObj, onClickBtn }) => {
+const Menu = ({ paragraphs, outputText, setOutputText, iconButtonObj, onClickBtn, setStatus }) => {
 
     const contenido = (
         <>
             {
                 paragraphs && paragraphs.map((paragraph, index) => {
-                    return <Paragraph key={index}>
+                    return <Paragraph key={index} style={{ textAlign: 'justify' }}>
                         {paragraph}
                     </Paragraph>
                 })
+            }
+            {
+                <SimulatorBuilder setStatus={setStatus} setOutputText={setOutputText} />
             }
             {
                 iconButtonObj && iconButtonObj.map((ib, index) => {
@@ -42,7 +46,7 @@ const Menu = ({ paragraphs, outputText, setOutputText, iconButtonObj, onClickBtn
                         key={index}
                         text={ib.text}
                         src={ib.src ? ib.src : ""}
-                        onClickBtn={onClickBtn}
+                        onClickBtn={onClickBtn[index]}
                     />
                 })
             }

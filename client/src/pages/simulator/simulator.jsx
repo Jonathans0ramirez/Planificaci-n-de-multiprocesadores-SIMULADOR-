@@ -36,7 +36,7 @@ const transitionStyles = {
     exited: { opacity: 0 },
 };
 
-const Content = ({ text, setText, onClickBtn, nodeRef }) => (
+const Content = ({ text, nodeRef, setText, setStatus, onClickBtn }) => (
     <Fragment>
         <Row style={{ padding: '20px 37px', border: '1px solid black' }}>
             <Menu
@@ -45,6 +45,7 @@ const Content = ({ text, setText, onClickBtn, nodeRef }) => (
                 text={text}
                 setOutputText={setText}
                 onClickBtn={onClickBtn}
+                setStatus={setStatus}
             />
         </Row>
         <Transition in={text ? true : false} timeout={duration} nodeRef={nodeRef}>
@@ -63,6 +64,7 @@ const Content = ({ text, setText, onClickBtn, nodeRef }) => (
 const Simulator = () => {
     const nodeRef = useRef(null)
     const [text, setText] = useState('');
+    const [status, setStatus] = useState('Waiting');
 
     const handleToggle = (e) => {
         text ? setText('') : setText('No me parece');
@@ -75,10 +77,10 @@ const Simulator = () => {
             subTitle="SIMULADOR"
             tags={
                 <>
-                    <Tag icon={<SyncOutlined spin />} color="gold">Running</Tag>
-                    <Tag icon={<CheckCircleOutlined />} color="green">Ready</Tag>
-                    <Tag icon={<CloseCircleOutlined />} color="red">Error</Tag>
-                    <Tag icon={<ClockCircleOutlined />} color="default">Waiting</Tag>
+                    {status === 'Running' && <Tag icon={<SyncOutlined spin />} color="gold">Running</Tag>}
+                    {status === 'Ready' && <Tag icon={<CheckCircleOutlined />} color="green">Ready</Tag>}
+                    {status === 'Error' && <Tag icon={<CloseCircleOutlined />} color="red">Error</Tag>}
+                    {status === 'Waiting' && <Tag icon={<ClockCircleOutlined />} color="default">Waiting</Tag>}
                 </>
             }
 
@@ -86,9 +88,10 @@ const Simulator = () => {
         >
             <Content
                 text={text}
-                setText={setText}
-                onClickBtn={handleToggle}
                 nodeRef={nodeRef}
+                setText={setText}
+                setStatus={setStatus}
+                onClickBtn={handleToggle}
             >
             </Content>
         </PageHeader>

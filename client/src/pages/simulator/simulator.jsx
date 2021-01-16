@@ -1,7 +1,6 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useRef } from 'react';
 import {
     PageHeader,
-    Typography,
     Tag,
     Row
 } from 'antd';
@@ -12,64 +11,49 @@ import {
     SyncOutlined
 } from '@ant-design/icons';
 
-import iconSimulator from './assets/iconSimulator.svg';
+import iconSimulator from '../../assets/iconSimulator.svg';
 import OutputScreen from '../../components/output/outputScreen';
+import TransitionJ from '../../components/transition/transition';
+import Menu from '../../components/menu/menu';
+import {
+    menuIconButtons,
+    menuParagraphs
+} from '../../assets/data';
 import 'antd/dist/antd.css';
-import simu from './simulator.module.css';
+import './simulator.module.css';
 
-const { Paragraph } = Typography;
-
-const IconLink = ({ src, text }) => (
-    <a className={simu['example-link']}>
-        <img className={simu['example-link-icon']} src={src} alt={text} />
-        {text}
-    </a>
-);
-
-const content = (
-    <>
-        <Paragraph>
-            Ant Design interprets the color system into two levels: a system-level color system and a
-            product-level color system.
-        </Paragraph>
-        <Paragraph>
-            Ant Design's design team preferred to design with the HSB color model, which makes it
-            easier for designers to have a clear psychological expectation of color when adjusting colors,
-            as well as facilitate communication in teams.
-        </Paragraph>
-        <div>
-            <IconLink
-                src="https://gw.alipayobjects.com/zos/rmsportal/MjEImQtenlyueSmVEfUD.svg"
-                text="Quick Start"
-            />
-            <IconLink
-                src="https://gw.alipayobjects.com/zos/rmsportal/NbuDUAuBlIApFuDvWiND.svg"
-                text=" Product Info"
-            />
-            <IconLink
-                src="https://gw.alipayobjects.com/zos/rmsportal/ohOEPSYdDTNnyMbGuyLb.svg"
-                text="Product Doc"
-            />
-        </div>
-    </>
-);
-
-const Content = ({ children, extraContent, text }) => (
+const Content = ({ text, nodeRef, setText, setStatus, onClickBtn, showSimulatorBuilder }) => (
     <Fragment>
         <Row style={{ padding: '20px 37px', border: '1px solid black' }}>
-            <div style={{ flex: 1 }}>{children}</div>
-            <div className={simu['image']}>{extraContent}</div>
+            <Menu
+                paragraphs={menuParagraphs}
+                iconButtonObj={menuIconButtons}
+                text={text}
+                setOutputText={setText}
+                onClickBtn={onClickBtn}
+                setStatus={setStatus}
+                showSimulatorBuilder={showSimulatorBuilder}
+            />
         </Row>
-        {
-            text && <Row>
-                <OutputScreen text={text} />
-            </Row>
-        }
+        <TransitionJ
+            prop={text}
+            nodeRef={nodeRef}
+        >
+            <OutputScreen text={text} />
+        </TransitionJ>
     </Fragment>
 );
 
 const Simulator = () => {
-    const [text, setText] = useState('NO ME PARECE');
+    const nodeRef = useRef(null);
+    const [text, setText] = useState('');
+    const [status, setStatus] = useState('Waiting');
+    const [showSimulatorBuilder, setShowSimulatorBuilder] = useState(false);
+
+    const handleToggle = (e) => {
+        setShowSimulatorBuilder(!showSimulatorBuilder);
+    }
+
     return (
         <PageHeader
             title="Planificación de multiprocesadores"
@@ -77,26 +61,23 @@ const Simulator = () => {
             subTitle="SIMULADOR"
             tags={
                 <>
-                    <Tag icon={<SyncOutlined spin />} color="gold">Running</Tag>
-                    <Tag icon={<CheckCircleOutlined />} color="green">Ready</Tag>
-                    <Tag icon={<CloseCircleOutlined />} color="red">Error</Tag>
-                    <Tag icon={<ClockCircleOutlined />} color="default">Waiting</Tag>
+                    {status === 'Running' && <Tag icon={<SyncOutlined spin />} color="gold">Running</Tag>}
+                    {status === 'Ready' && <Tag icon={<CheckCircleOutlined />} color="green">Ready</Tag>}
+                    {status === 'Error' && <Tag icon={<CloseCircleOutlined />} color="red">Error</Tag>}
+                    {status === 'Waiting' && <Tag icon={<ClockCircleOutlined />} color="default">Waiting</Tag>}
                 </>
             }
 
             avatar={{ src: iconSimulator }}
         >
             <Content
-                extraContent={
-                    <img
-                        src="https://gw.alipayobjects.com/zos/antfincdn/K%24NnlsB%26hz/pageHeader.svg"
-                        alt="content"
-                        width="100%"
-                    />
-                }
                 text={text}
+                nodeRef={nodeRef}
+                setText={setText}
+                setStatus={setStatus}
+                onClickBtn={handleToggle}
+                showSimulatorBuilder={showSimulatorBuilder}
             >
-                {content}
             </Content>
         </PageHeader>
     )

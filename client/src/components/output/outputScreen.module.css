@@ -13,7 +13,7 @@ pre {
     overflow: hidden;
     padding: 2rem;
     color: white;
-    font: 1.3rem Inconsolata, monospace;
+    font: 1rem Inconsolata, monospace;
     text-shadow: 0 0 5px #C8C8C8;
 }
 output::after {
@@ -22,7 +22,7 @@ output::after {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     background: repeating-linear-gradient(
         0deg,
         rgb(0, 0, 0, 0.15),

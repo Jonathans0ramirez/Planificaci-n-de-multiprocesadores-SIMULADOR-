@@ -56,7 +56,6 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
     };
 
     const onFinish = (values, mode) => {
-        console.log('Received values of form:', values);
         setStatus('Running');
         callApi(values, mode)
             .then(res => {

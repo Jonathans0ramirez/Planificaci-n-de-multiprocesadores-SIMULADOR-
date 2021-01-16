@@ -51,6 +51,7 @@ const Simulator = () => {
     const [showSimulatorBuilder, setShowSimulatorBuilder] = useState(false);
 
     const handleToggle = (e) => {
+        text && showSimulatorBuilder && setText('');
         setShowSimulatorBuilder(!showSimulatorBuilder);
     }
 

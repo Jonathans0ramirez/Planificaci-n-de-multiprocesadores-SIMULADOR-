@@ -36,8 +36,13 @@ export const simulatorModes = [
 export const params = {
     Cache: [
         {
-            label: "CACHE_SIZE",
-            value: "-M",
+            label: "JOB_NUM",
+            value: "-j",
+            needValue: true
+        },
+        {
+            label: "MAX_WSET",
+            value: "-W",
             needValue: true
         },
         {
@@ -46,20 +51,20 @@ export const params = {
             needValue: true
         },
         {
-            label: "JOB_NUM",
-            value: "-j",
-            needValue: true
-        },
-        {
-            label: "MAX_WSET",
-            value: "-W",
+            label: "CACHE_SIZE",
+            value: "-M",
             needValue: true
         }
     ],
     Jobs: [
         {
-            label: "CACHE_SIZE",
-            value: "-M",
+            label: "JOB_NUM",
+            value: "-j",
+            needValue: true
+        },
+        {
+            label: "MAX_WSET",
+            value: "-W",
             needValue: true
         },
         {
@@ -68,13 +73,8 @@ export const params = {
             needValue: true
         },
         {
-            label: "JOB_NUM",
-            value: "-j",
-            needValue: true
-        },
-        {
-            label: "MAX_WSET",
-            value: "-W",
+            label: "CACHE_SIZE",
+            value: "-M",
             needValue: true
         }
     ],
@@ -85,13 +85,8 @@ export const params = {
             needValue: false
         },
         {
-            label: "CACHE_SIZE",
-            value: "-M",
-            needValue: true
-        },
-        {
-            label: "NUM_CPUS'S",
-            value: "-n",
+            label: "SEED",
+            value: "-s",
             needValue: true
         },
         {
@@ -100,9 +95,89 @@ export const params = {
             needValue: true
         },
         {
+            label: "MAX_RUN",
+            value: "-R",
+            needValue: true
+        },
+        {
             label: "MAX_WSET",
             value: "-W",
             needValue: true
+        },
+        {
+            label: "JOB_LIST",
+            value: "-L",
+            needValue: true
+        },
+        {
+            label: "per_cpu_queues",
+            value: "-p",
+            needValue: true
+        },
+        {
+            label: "AFFINITY",
+            value: "-A",
+            needValue: true
+        },
+        {
+            label: "NUM_CPUS'S",
+            value: "-n",
+            needValue: true
+        },
+        {
+            label: "TIME_SLICE",
+            value: "-q",
+            needValue: true
+        },
+        {
+            label: "PEEK_INTERVAL",
+            value: "-P",
+            needValue: true
+        },
+        {
+            label: "WARMUP_TIME",
+            value: "-w",
+            needValue: true
+        },
+        {
+            label: "WARM_RATE",
+            value: "-r",
+            needValue: true
+        },
+        {
+            label: "CACHE_SIZE",
+            value: "-M",
+            needValue: true
+        },
+        {
+            label: "rand_order",
+            value: "-o",
+            needValue: false
+        },
+        {
+            label: "trace",
+            value: "-t",
+            needValue: false
+        },
+        {
+            label: "trace_time_left",
+            value: "-T",
+            needValue: false
+        },
+        {
+            label: "trace_cache",
+            value: "-C",
+            needValue: false
+        },
+        {
+            label: "trace_sched",
+            value: "-S",
+            needValue: false
+        },
+        {
+            label: "compute",
+            value: "-c",
+            needValue: false
         }
     ]
 };

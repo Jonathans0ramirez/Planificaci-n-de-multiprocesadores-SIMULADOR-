@@ -1,5 +1,4 @@
 import React, { Fragment, useState, useRef } from 'react';
-import { Transition } from 'react-transition-group';
 import {
     PageHeader,
     Tag,
@@ -14,6 +13,7 @@ import {
 
 import iconSimulator from '../../assets/iconSimulator.svg';
 import OutputScreen from '../../components/output/outputScreen';
+import TransitionJ from '../../components/transition/transition';
 import Menu from '../../components/menu/menu';
 import {
     menuIconButtons,
@@ -22,21 +22,7 @@ import {
 import 'antd/dist/antd.css';
 import './simulator.module.css';
 
-const duration = 300;
-
-const defaultStyle = {
-    transition: `opacity ${duration}ms ease-in-out`,
-    opacity: 0,
-}
-
-const transitionStyles = {
-    entering: { opacity: 1 },
-    entered: { opacity: 1 },
-    exiting: { opacity: 0 },
-    exited: { opacity: 0 },
-};
-
-const Content = ({ text, nodeRef, setText, setStatus, onClickBtn }) => (
+const Content = ({ text, nodeRef, setText, setStatus, onClickBtn, showSimulatorBuilder }) => (
     <Fragment>
         <Row style={{ padding: '20px 37px', border: '1px solid black' }}>
             <Menu
@@ -46,28 +32,26 @@ const Content = ({ text, nodeRef, setText, setStatus, onClickBtn }) => (
                 setOutputText={setText}
                 onClickBtn={onClickBtn}
                 setStatus={setStatus}
+                showSimulatorBuilder={showSimulatorBuilder}
             />
         </Row>
-        <Transition in={text ? true : false} timeout={duration} nodeRef={nodeRef}>
-            {state => (
-                <Row style={{
-                    ...defaultStyle,
-                    ...transitionStyles[state]
-                }}>
-                    <OutputScreen text={text} />
-                </Row>
-            )}
-        </Transition>
+        <TransitionJ
+            prop={text}
+            nodeRef={nodeRef}
+        >
+            <OutputScreen text={text} />
+        </TransitionJ>
     </Fragment>
 );
 
 const Simulator = () => {
-    const nodeRef = useRef(null)
+    const nodeRef = useRef(null);
     const [text, setText] = useState('');
     const [status, setStatus] = useState('Waiting');
+    const [showSimulatorBuilder, setShowSimulatorBuilder] = useState(false);
 
     const handleToggle = (e) => {
-        text ? setText('') : setText('No me parece');
+        setShowSimulatorBuilder(!showSimulatorBuilder);
     }
 
     return (
@@ -92,6 +76,7 @@ const Simulator = () => {
                 setText={setText}
                 setStatus={setStatus}
                 onClickBtn={handleToggle}
+                showSimulatorBuilder={showSimulatorBuilder}
             >
             </Content>
         </PageHeader>

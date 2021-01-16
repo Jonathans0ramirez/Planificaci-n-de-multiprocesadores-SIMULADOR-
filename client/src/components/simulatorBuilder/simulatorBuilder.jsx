@@ -25,13 +25,26 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
     const [form] = Form.useForm();
     const [needValue, setNeedValue] = useState(true);
 
-    const callApi = async () => {
+    const callApi = async ({ params }, mode) => {
+        const req = params.filter((value, index, self) =>
+            index === self.findIndex(t => (
+                t.option === value.option
+            ))
+        );
+        const options = [];
+        req.forEach(jv => {
+            options.push(jv.option);
+            jv.value && options.push(jv.value);
+        });
+
+        mode === "Cache" ? options.push("-C", "-c") : options.push("-S", "-T");
+
         const response = await fetch('/api/execute-script', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ params: '-h' }),
+            body: JSON.stringify({ params: options }),
         });
 
         let body = await response.text();
@@ -42,10 +55,10 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
         return body;
     };
 
-    const onFinish = values => {
+    const onFinish = (values, mode) => {
         console.log('Received values of form:', values);
         setStatus('Running');
-        callApi()
+        callApi(values, mode)
             .then(res => {
                 setStatus('Ready');
                 setOutputText(res.replace(/<br[^>]*>/gi, "\n"));
@@ -67,7 +80,7 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
     }
 
     return (
-        <Form form={form} name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off">
+        <Form form={form} name="dynamic_form_nest_item" onFinish={(e) => onFinish(e, form.getFieldValue('simulatorModes'))} autoComplete="off">
             <Item name="simulatorModes" label="Mode" rules={[{ required: true, message: 'Missing mode' }]}>
                 <Select options={simulatorModes} onChange={handleChange} />
             </Item>
@@ -86,9 +99,9 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
                                         <Item
                                             {...field}
                                             label="Option"
-                                            name={[field.name, 'sight']}
-                                            fieldKey={[field.fieldKey, 'sight']}
-                                            rules={[{ required: true, message: 'Missing sight' }]}
+                                            name={[field.name, 'option']}
+                                            fieldKey={[field.fieldKey, 'option']}
+                                            rules={[{ required: true, message: 'Missing option' }]}
                                         >
                                             <Select disabled={!form.getFieldValue('simulatorModes')} style={{ width: 130 }} onChange={(e) => checkValues(e, form.getFieldValue('simulatorModes'))}>
                                                 {(params[form.getFieldValue('simulatorModes')] || []).map(item => (
@@ -104,9 +117,9 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
                                     needValue && <Item
                                         {...field}
                                         label="Value"
-                                        name={[field.name, 'price']}
-                                        fieldKey={[field.fieldKey, 'price']}
-                                        rules={[{ required: true, message: 'Missing price' }]}
+                                        name={[field.name, 'value']}
+                                        fieldKey={[field.fieldKey, 'value']}
+                                        rules={[{ required: true, message: 'Missing value' }]}
                                     >
                                         <Input />
                                     </Item>

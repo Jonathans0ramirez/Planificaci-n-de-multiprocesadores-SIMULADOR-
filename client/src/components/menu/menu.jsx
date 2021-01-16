@@ -26,7 +26,7 @@ const ContentMenu = ({ children, extraContent }) => (
     </>
 )
 
-const Menu = ({ paragraphs, outputText, setOutputText, iconButtonObj, onClickBtn, setStatus }) => {
+const Menu = ({ paragraphs, showSimulatorBuilder, setOutputText, iconButtonObj, onClickBtn, setStatus }) => {
 
     const contenido = (
         <>
@@ -38,7 +38,7 @@ const Menu = ({ paragraphs, outputText, setOutputText, iconButtonObj, onClickBtn
                 })
             }
             {
-                <SimulatorBuilder setStatus={setStatus} setOutputText={setOutputText} />
+                showSimulatorBuilder && <SimulatorBuilder setStatus={setStatus} setOutputText={setOutputText} />
             }
             {
                 iconButtonObj && iconButtonObj.map((ib, index) => {
@@ -46,7 +46,7 @@ const Menu = ({ paragraphs, outputText, setOutputText, iconButtonObj, onClickBtn
                         key={index}
                         text={ib.text}
                         src={ib.src ? ib.src : ""}
-                        onClickBtn={onClickBtn[index]}
+                        onClickBtn={onClickBtn}
                     />
                 })
             }

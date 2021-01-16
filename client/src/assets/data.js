@@ -36,71 +36,71 @@ export const simulatorModes = [
 export const params = {
     Cache: [
         {
-            label: "Caché Size",
+            label: "CACHE_SIZE",
             value: "-M",
             needValue: true
         },
         {
-            label: "CPU'S",
+            label: "NUM_CPUS'S",
             value: "-n",
             needValue: true
         },
         {
-            label: "Jobs",
+            label: "JOB_NUM",
             value: "-j",
             needValue: true
         },
         {
-            label: "Works",
+            label: "MAX_WSET",
             value: "-W",
             needValue: true
         }
     ],
     Jobs: [
         {
-            label: "Caché Size",
+            label: "CACHE_SIZE",
             value: "-M",
             needValue: true
         },
         {
-            label: "CPU'S",
+            label: "NUM_CPUS'S",
             value: "-n",
             needValue: true
         },
         {
-            label: "Jobs",
+            label: "JOB_NUM",
             value: "-j",
             needValue: true
         },
         {
-            label: "Works",
+            label: "MAX_WSET",
             value: "-W",
             needValue: true
         }
     ],
     FFA: [
         {
-            label: "Ayuda",
+            label: "HELP",
             value: "-h",
             needValue: false
         },
         {
-            label: "Caché Size",
+            label: "CACHE_SIZE",
             value: "-M",
             needValue: true
         },
         {
-            label: "CPU'S",
+            label: "NUM_CPUS'S",
             value: "-n",
             needValue: true
         },
         {
-            label: "Jobs",
+            label: "JOB_NUM",
             value: "-j",
             needValue: true
         },
         {
-            label: "Works",
+            label: "MAX_WSET",
             value: "-W",
             needValue: true
         }

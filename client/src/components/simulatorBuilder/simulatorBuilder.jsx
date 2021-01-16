@@ -37,7 +37,7 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
             jv.value && options.push(jv.value);
         });
 
-        mode === "Cache" ? options.push("-C", "-c") : options.push("-S", "-T");
+        mode === "Cache" ? options.push("-C", "-c", "-t") : options.push("-S", "-T", "-t");
 
         const response = await fetch('/api/execute-script', {
             method: 'POST',

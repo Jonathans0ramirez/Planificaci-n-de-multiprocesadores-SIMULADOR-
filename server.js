@@ -21,7 +21,6 @@ app.get('/api/hello', (req, res) => {
 //Router to handle the incoming request. 
 app.post("/api/execute-script", (req, res, next) => {
     const params = req.body.params;
-    console.log(params)
     //Here are the option object in which arguments can be passed for the python_test.js. 
     let options = {
         mode: 'text',

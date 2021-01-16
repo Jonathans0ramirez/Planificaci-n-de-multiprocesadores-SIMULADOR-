@@ -79,9 +79,21 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
     }
 
     return (
-        <Form form={form} name="dynamic_form_nest_item" onFinish={(e) => onFinish(e, form.getFieldValue('simulatorModes'))} autoComplete="off">
-            <Item name="simulatorModes" label="Mode" rules={[{ required: true, message: 'Missing mode' }]}>
-                <Select options={simulatorModes} onChange={handleChange} />
+        <Form
+            form={form}
+            name="dynamic_form_nest_item"
+            onFinish={(e) => onFinish(e, form.getFieldValue('simulatorModes'))}
+            autoComplete="off"
+        >
+            <Item
+                name="simulatorModes"
+                label="Modo"
+                rules={[{ required: true, message: 'Missing mode' }]}
+            >
+                <Select
+                    options={simulatorModes}
+                    onChange={handleChange}
+                />
             </Item>
             <List name="params">
                 {(fields, { add, remove }) => (
@@ -97,12 +109,16 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
                                     {() => (
                                         <Item
                                             {...field}
-                                            label="Option"
+                                            label="Argumento"
                                             name={[field.name, 'option']}
                                             fieldKey={[field.fieldKey, 'option']}
                                             rules={[{ required: true, message: 'Missing option' }]}
                                         >
-                                            <Select disabled={!form.getFieldValue('simulatorModes')} style={{ width: 130 }} onChange={(e) => checkValues(e, form.getFieldValue('simulatorModes'))}>
+                                            <Select
+                                                onChange={(e) => checkValues(e, form.getFieldValue('simulatorModes'))}
+                                                disabled={!form.getFieldValue('simulatorModes')}
+                                                style={{ width: 130 }}
+                                            >
                                                 {(params[form.getFieldValue('simulatorModes')] || []).map(item => (
                                                     <Option key={item.value} value={item.value}>
                                                         {item.label}
@@ -115,12 +131,12 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
                                 {
                                     needValue && <Item
                                         {...field}
-                                        label="Value"
+                                        label="Valor"
                                         name={[field.name, 'value']}
                                         fieldKey={[field.fieldKey, 'value']}
                                         rules={[{ required: true, message: 'Missing value' }]}
                                     >
-                                        <InputNumber />
+                                        <InputNumber disabled={!form.getFieldValue('simulatorModes')} />
                                     </Item>
                                 }
 
@@ -130,7 +146,7 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
 
                         <Item>
                             <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
-                                Add Params
+                                Agregar parametro
                   </Button>
                         </Item>
                     </>
@@ -138,7 +154,7 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
             </List>
             <Item>
                 <Button type="primary" htmlType="submit">
-                    Submit
+                    Enviar
             </Button>
             </Item>
         </Form>

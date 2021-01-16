@@ -1,16 +1,17 @@
 export const menuParagraphs = [
-    "Welcome to multi.py, a rudimentary multi-CPU scheduling simulator. This simulator has a number of features to play with, so pay attention! Or don't, because you are lazy that way. But when that exam rolls around...",
-    "To run a simulation, you need some jobs to schedule. There are two ways to do this. The first is to let the system create some jobs with random characteristics for you (this is the default, i.e., if you specify nothing, you get this); there are also some controls to control (somewhat) the nature of randomly-generated jobs, described further below. The second is to specify a list of jobs for the system to schedule precisely; this is also described in more detail below."
+    "Simulador rudimentario de multi-CPU scheduling. Este simulador tiene una serie de funciones con las que jugar.",
+    "El objetivo de... es mostrar detalladamente los indicadores de la caché y las tareas realizadas, basadas en parametros customizables.",
+    "Para ejecutar una simulación, necesita programar algunos trabajos. Hay dos maneras de hacer esto. La primera es dejar que el sistema cree algunos trabajos con características aleatorias para usted (esto es lo predeterminado, es decir, si no especifica nada, obtiene esto); También existen algunos controles para controlar (algo) la naturaleza de los trabajos generados aleatoriamente, que se describen más adelante. El segundo es especificar una lista de trabajos para que el sistema programe con precisión; esto también se describe con más detalle a continuación."
 ];
 
 export const menuIconButtons = [
     {
         src: "https://gw.alipayobjects.com/zos/rmsportal/MjEImQtenlyueSmVEfUD.svg",
-        text: "Start"
+        text: "Iniciar"
     },
     {
         src: "https://gw.alipayobjects.com/zos/rmsportal/NbuDUAuBlIApFuDvWiND.svg",
-        text: "Clear"
+        text: "Reiniciar"
     },
     // {
     //     src: "https://gw.alipayobjects.com/zos/rmsportal/ohOEPSYdDTNnyMbGuyLb.svg",
@@ -20,15 +21,15 @@ export const menuIconButtons = [
 
 export const simulatorModes = [
     {
-        label: "Caché", //NIVEL DE UTILIZACIÓN DE LA CACHÉ. TIEMPO 
+        label: "Caché Trace", //NIVEL DE UTILIZACIÓN DE LA CACHÉ. TIEMPO 
         value: "Cache"
     },
     {
-        label: "Tareas", //COLA DE ESPERA DE LAS TAREAS, TIEMPO, CPU ASIGNADA
+        label: "Tareas Trace", //COLA DE ESPERA DE LAS TAREAS, TIEMPO, CPU ASIGNADA
         value: "Jobs"
     },
     {
-        label: "Free For All", //COLA DE ESPERA DE LAS TAREAS, TIEMPO, CPU ASIGNADA
+        label: "Personalizado", //TODAS LAS OPCIONES
         value: "FFA"
     }
 ];

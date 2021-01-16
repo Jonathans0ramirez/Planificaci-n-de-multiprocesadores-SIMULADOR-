@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
     Form,
-    Input,
+    InputNumber,
     Button,
     Space,
     Select
@@ -121,7 +121,7 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
                                         fieldKey={[field.fieldKey, 'value']}
                                         rules={[{ required: true, message: 'Missing value' }]}
                                     >
-                                        <Input />
+                                        <InputNumber />
                                     </Item>
                                 }
 

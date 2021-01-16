@@ -12,41 +12,97 @@ export const menuIconButtons = [
         src: "https://gw.alipayobjects.com/zos/rmsportal/NbuDUAuBlIApFuDvWiND.svg",
         text: "Clear"
     },
-    {
-        src: "https://gw.alipayobjects.com/zos/rmsportal/ohOEPSYdDTNnyMbGuyLb.svg",
-        text: "Product Doc"
-    }
+    // {
+    //     src: "https://gw.alipayobjects.com/zos/rmsportal/ohOEPSYdDTNnyMbGuyLb.svg",
+    //     text: "Product Doc"
+    // }
 ];
 
 export const simulatorModes = [
     {
-        label: "First Simulator",
-        value: "First"
+        label: "Caché", //NIVEL DE UTILIZACIÓN DE LA CACHÉ. TIEMPO 
+        value: "Cache"
     },
     {
-        label: "Second Simulator",
-        value: "Second"
+        label: "Tareas", //COLA DE ESPERA DE LAS TAREAS, TIEMPO, CPU ASIGNADA
+        value: "Jobs"
+    },
+    {
+        label: "Free For All", //COLA DE ESPERA DE LAS TAREAS, TIEMPO, CPU ASIGNADA
+        value: "FFA"
     }
 ];
 
-export const sights = {
-    First: [
+export const params = {
+    Cache: [
         {
-            label: 'Ayuda',
-            value: '-h'
+            label: "Caché Size",
+            value: "-M",
+            needValue: true
         },
         {
-            label: '',
-            value: 'M'
+            label: "CPU'S",
+            value: "-n",
+            needValue: true
         },
         {
-            label: '',
-            value: 'P'
+            label: "Jobs",
+            value: "-j",
+            needValue: true
         },
         {
-            label: '',
-            value: 'L'
+            label: "Works",
+            value: "-W",
+            needValue: true
         }
     ],
-    Second: []
+    Jobs: [
+        {
+            label: "Caché Size",
+            value: "-M",
+            needValue: true
+        },
+        {
+            label: "CPU'S",
+            value: "-n",
+            needValue: true
+        },
+        {
+            label: "Jobs",
+            value: "-j",
+            needValue: true
+        },
+        {
+            label: "Works",
+            value: "-W",
+            needValue: true
+        }
+    ],
+    FFA: [
+        {
+            label: "Ayuda",
+            value: "-h",
+            needValue: false
+        },
+        {
+            label: "Caché Size",
+            value: "-M",
+            needValue: true
+        },
+        {
+            label: "CPU'S",
+            value: "-n",
+            needValue: true
+        },
+        {
+            label: "Jobs",
+            value: "-j",
+            needValue: true
+        },
+        {
+            label: "Works",
+            value: "-W",
+            needValue: true
+        }
+    ]
 };

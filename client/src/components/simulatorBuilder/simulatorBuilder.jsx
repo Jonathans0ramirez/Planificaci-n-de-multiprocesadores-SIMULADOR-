@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     Form,
     Input,
@@ -8,7 +8,7 @@ import {
 } from 'antd';
 import {
     simulatorModes,
-    sights
+    params
 } from '../../assets/data';
 import {
     MinusCircleOutlined,
@@ -23,6 +23,7 @@ const {
 
 const SimulatorBuilder = ({ setStatus, setOutputText }) => {
     const [form] = Form.useForm();
+    const [needValue, setNeedValue] = useState(true);
 
     const callApi = async () => {
         const response = await fetch('/api/execute-script', {
@@ -57,15 +58,20 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
 
     const handleChange = () => {
         setStatus('Ready');
-        form.setFieldsValue({ sights: [] });
+        form.setFieldsValue({ params: [] });
     };
+
+    const checkValues = (e, mode) => {
+        const { needValue } = params[mode].find(param => param.value === e);
+        setNeedValue(needValue);
+    }
 
     return (
         <Form form={form} name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off">
             <Item name="simulatorModes" label="Mode" rules={[{ required: true, message: 'Missing mode' }]}>
                 <Select options={simulatorModes} onChange={handleChange} />
             </Item>
-            <List name="sights">
+            <List name="params">
                 {(fields, { add, remove }) => (
                     <>
                         {fields.map(field => (
@@ -73,7 +79,7 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
                                 <Item
                                     noStyle
                                     shouldUpdate={(prevValues, curValues) =>
-                                        prevValues.simulatorModes !== curValues.simulatorModes || prevValues.sights !== curValues.sights
+                                        prevValues.simulatorModes !== curValues.simulatorModes || prevValues.params !== curValues.params
                                     }
                                 >
                                     {() => (
@@ -84,8 +90,8 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
                                             fieldKey={[field.fieldKey, 'sight']}
                                             rules={[{ required: true, message: 'Missing sight' }]}
                                         >
-                                            <Select disabled={!form.getFieldValue('simulatorModes')} style={{ width: 130 }}>
-                                                {(sights[form.getFieldValue('simulatorModes')] || []).map(item => (
+                                            <Select disabled={!form.getFieldValue('simulatorModes')} style={{ width: 130 }} onChange={(e) => checkValues(e, form.getFieldValue('simulatorModes'))}>
+                                                {(params[form.getFieldValue('simulatorModes')] || []).map(item => (
                                                     <Option key={item.value} value={item.value}>
                                                         {item.label}
                                                     </Option>
@@ -94,15 +100,17 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
                                         </Item>
                                     )}
                                 </Item>
-                                <Item
-                                    {...field}
-                                    label="Value"
-                                    name={[field.name, 'price']}
-                                    fieldKey={[field.fieldKey, 'price']}
-                                    rules={[{ required: true, message: 'Missing price' }]}
-                                >
-                                    <Input />
-                                </Item>
+                                {
+                                    needValue && <Item
+                                        {...field}
+                                        label="Value"
+                                        name={[field.name, 'price']}
+                                        fieldKey={[field.fieldKey, 'price']}
+                                        rules={[{ required: true, message: 'Missing price' }]}
+                                    >
+                                        <Input />
+                                    </Item>
+                                }
 
                                 <MinusCircleOutlined onClick={() => remove(field.name)} />
                             </Space>
@@ -110,7 +118,7 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
 
                         <Item>
                             <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
-                                Add sights
+                                Add Params
                   </Button>
                         </Item>
                     </>

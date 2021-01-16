@@ -6,17 +6,17 @@ import { Transition } from 'react-transition-group';
 
 const duration = 300;
 
-const defaultStylePREVIO = {
-    transition: `opacity ${duration}ms ease-in-out`,
-    opacity: 0,
-}
+// const defaultStylePREVIO = {
+//     transition: `opacity ${duration}ms ease-in-out`,
+//     opacity: 0,
+// }
 
-const transitionStylesPREVIO = {
-    entering: { opacity: 1 },
-    entered: { opacity: 1 },
-    exiting: { opacity: 0 },
-    exited: { opacity: 0 },
-};
+// const transitionStylesPREVIO = {
+//     entering: { opacity: 1 },
+//     entered: { opacity: 1 },
+//     exiting: { opacity: 0 },
+//     exited: { opacity: 0 },
+// };
 
 const defaultStyle = {
     transition: `opacity ${duration}ms ease-in-out, transform ${duration}ms`,

@@ -10,12 +10,20 @@ import SimulatorBuilder from '../simulatorBuilder/simulatorBuilder';
 
 const { Paragraph } = Typography;
 
-const IconButton = ({ src, text, onClickBtn }) => (
-    <Button className={menuCss['link']} type="link" onClick={onClickBtn}>
+const IconButton = ({ iconButtonObj, onClickBtn, showSimulatorBuilder }) => (
+    <Button
+        className={menuCss['link']}
+        type="link"
+        onClick={onClickBtn}
+    >
         <span>
-            <img className={menuCss['link-icon']} src={src} alt={text} />
+            <img
+                className={menuCss['link-icon']}
+                src={!showSimulatorBuilder ? iconButtonObj[0].src : iconButtonObj[1].src}
+                alt={!showSimulatorBuilder ? iconButtonObj[0].text : iconButtonObj[1].text}
+            />
         </span>
-        {text}
+        {!showSimulatorBuilder ? iconButtonObj[0].text : iconButtonObj[1].text}
     </Button>
 );
 
@@ -32,23 +40,28 @@ const Menu = ({ paragraphs, showSimulatorBuilder, setOutputText, iconButtonObj, 
         <>
             {
                 paragraphs && paragraphs.map((paragraph, index) => {
-                    return <Paragraph key={index} style={{ textAlign: 'justify' }}>
+                    return <Paragraph
+                        key={index}
+                        style={{ textAlign: 'justify' }}
+                    >
                         {paragraph}
                     </Paragraph>
                 })
             }
             {
-                showSimulatorBuilder && <SimulatorBuilder setStatus={setStatus} setOutputText={setOutputText} />
+                showSimulatorBuilder &&
+                <SimulatorBuilder
+                    setStatus={setStatus}
+                    setOutputText={setOutputText}
+                />
             }
             {
-                iconButtonObj && iconButtonObj.map((ib, index) => {
-                    return <IconButton
-                        key={index}
-                        text={ib.text}
-                        src={ib.src ? ib.src : ""}
-                        onClickBtn={onClickBtn}
-                    />
-                })
+                iconButtonObj &&
+                <IconButton
+                    iconButtonObj={iconButtonObj}
+                    onClickBtn={onClickBtn}
+                    showSimulatorBuilder={showSimulatorBuilder}
+                />
             }
         </>
     );

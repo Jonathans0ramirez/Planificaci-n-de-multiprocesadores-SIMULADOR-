@@ -1,3 +1,6 @@
+import start from '../assets/start.svg';
+import eraser from '../assets/eraser.svg';
+
 export const menuParagraphs = [
     "Simulador rudimentario de multi-CPU scheduling. Este simulador tiene una serie de funciones con las que jugar.",
     "El objetivo de... es mostrar detalladamente los indicadores de la caché y las tareas realizadas, basadas en parametros customizables.",
@@ -6,11 +9,11 @@ export const menuParagraphs = [
 
 export const menuIconButtons = [
     {
-        src: "https://gw.alipayobjects.com/zos/rmsportal/MjEImQtenlyueSmVEfUD.svg",
+        src: start,
         text: "Iniciar"
     },
     {
-        src: "https://gw.alipayobjects.com/zos/rmsportal/NbuDUAuBlIApFuDvWiND.svg",
+        src: eraser,
         text: "Reiniciar"
     },
     // {

@@ -20,7 +20,7 @@ import {
     menuParagraphs
 } from '../../assets/data';
 import 'antd/dist/antd.css';
-import './simulator.module.css';
+import '../simulator/simulator.css';
 
 const Content = ({ text, nodeRef, setText, setStatus, onClickBtn, showSimulatorBuilder }) => (
     <Fragment>
@@ -58,7 +58,7 @@ const Simulator = () => {
     return (
         <PageHeader
             title="Planificación de multiprocesadores"
-            className="site-page-header"
+            className="site-page-header jaojds"
             subTitle="SIMULADOR"
             tags={
                 <>

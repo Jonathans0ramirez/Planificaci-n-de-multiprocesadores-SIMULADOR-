@@ -88,11 +88,12 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
             <Item
                 name="simulatorModes"
                 label="Modo"
-                rules={[{ required: true, message: 'Missing mode' }]}
+                rules={[{ required: true, message: 'No has seleccionado ningún modo.' }]}
             >
                 <Select
                     options={simulatorModes}
                     onChange={handleChange}
+                    allowClear
                 />
             </Item>
             <List name="params">
@@ -112,7 +113,7 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
                                             label="Argumento"
                                             name={[field.name, 'option']}
                                             fieldKey={[field.fieldKey, 'option']}
-                                            rules={[{ required: true, message: 'Missing option' }]}
+                                            rules={[{ required: true, message: 'No has seleccionado ningún argumento.' }]}
                                         >
                                             <Select
                                                 onChange={(e) => checkValues(e, form.getFieldValue('simulatorModes'))}
@@ -134,7 +135,7 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
                                         label="Valor"
                                         name={[field.name, 'value']}
                                         fieldKey={[field.fieldKey, 'value']}
-                                        rules={[{ required: true, message: 'Missing value' }]}
+                                        rules={[{ required: true, message: 'No has seleccionado ningún valor.' }]}
                                     >
                                         <InputNumber disabled={!form.getFieldValue('simulatorModes')} />
                                     </Item>
@@ -153,7 +154,7 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
                 )}
             </List>
             <Item>
-                <Button type="primary" htmlType="submit">
+                <Button type="primary" shape="round" size='large' htmlType="submit">
                     Enviar
             </Button>
             </Item>

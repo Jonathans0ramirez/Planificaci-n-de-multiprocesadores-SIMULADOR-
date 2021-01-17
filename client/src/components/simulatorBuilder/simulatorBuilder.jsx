@@ -154,7 +154,7 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
                 )}
             </List>
             <Item>
-                <Button type="primary" shape="round" size='large' htmlType="submit">
+                <Button block type="dashed" shape="round" size='large' htmlType="submit">
                     Enviar
             </Button>
             </Item>

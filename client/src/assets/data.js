@@ -2,9 +2,9 @@ import start from '../assets/start.svg';
 import eraser from '../assets/eraser.svg';
 
 export const menuParagraphs = [
-    "Simulador rudimentario de multi-CPU scheduling. Este simulador tiene una serie de funciones con las que jugar.",
-    "El objetivo de... es mostrar detalladamente los indicadores de la caché y las tareas realizadas, basadas en parametros customizables.",
-    "Para ejecutar una simulación, necesita programar algunos trabajos. Hay dos maneras de hacer esto. La primera es dejar que el sistema cree algunos trabajos con características aleatorias para usted (esto es lo predeterminado, es decir, si no especifica nada, obtiene esto); También existen algunos controles para controlar (algo) la naturaleza de los trabajos generados aleatoriamente, que se describen más adelante. El segundo es especificar una lista de trabajos para que el sistema programe con precisión; esto también se describe con más detalle a continuación."
+    "Integración gráfica del simulador rudimentario de multi-CPU scheduling, multi.py.",
+    "El objetivo de... es mostrar detalladamente los indicadores de la caché y las tareas realizadas, basadas en parametros customizables. Dos modos de simulaciones.",
+    "Para ejecutar cada simulación, se tienen dos posibilidades. La primera es dejar que el sistema cree algunas tareas con caracterísiticas aleatorias (predeterminado, sin especificar nada); También existe la posibilidad de manipular estas tareas generadas. La segunda es especificando características claves para que el simulador actúe con más precisión."
 ];
 
 export const menuIconButtons = [
@@ -32,7 +32,7 @@ export const simulatorModes = [
         value: "Jobs"
     },
     {
-        label: "Personalizado", //TODAS LAS OPCIONES
+        label: "Control Total", //TODAS LAS OPCIONES
         value: "FFA"
     }
 ];

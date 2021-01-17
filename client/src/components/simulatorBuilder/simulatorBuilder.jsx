@@ -60,7 +60,7 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
         callApi(values, mode)
             .then(res => {
                 setStatus('Ready');
-                setOutputText(res.replace(/<br[^>]*>/gi, "\n"));
+                setOutputText(res.replace(/<br[^>]*>/gi, "\n> "));
             })
             .catch(err => {
                 setStatus('Error');

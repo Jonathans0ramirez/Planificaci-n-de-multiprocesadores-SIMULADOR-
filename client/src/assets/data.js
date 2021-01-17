@@ -15,11 +15,7 @@ export const menuIconButtons = [
     {
         src: eraser,
         text: "Reiniciar"
-    },
-    // {
-    //     src: "https://gw.alipayobjects.com/zos/rmsportal/ohOEPSYdDTNnyMbGuyLb.svg",
-    //     text: "Product Doc"
-    // }
+    }
 ];
 
 export const simulatorModes = [

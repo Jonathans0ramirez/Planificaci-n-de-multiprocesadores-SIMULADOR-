@@ -6,6 +6,7 @@ import {
 
 import 'antd/dist/antd.css';
 import menuCss from './menu.module.css';
+import gears from '../../assets/gears.gif';
 import SimulatorBuilder from '../simulatorBuilder/simulatorBuilder';
 
 const { Paragraph } = Typography;
@@ -72,9 +73,10 @@ const Menu = ({ paragraphs, showSimulatorBuilder, setOutputText, iconButtonObj, 
         <ContentMenu
             extraContent={
                 <img
-                    src="https://gw.alipayobjects.com/zos/antfincdn/K%24NnlsB%26hz/pageHeader.svg"
+                    className={menuCss.img_gears}
+                    src={gears}
                     alt="content"
-                    width="100%"
+                    width="200px"
                 />
             }
         >

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
     Form,
-    Input,
+    InputNumber,
     Button,
     Space,
     Select
@@ -56,12 +56,11 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
     };
 
     const onFinish = (values, mode) => {
-        console.log('Received values of form:', values);
         setStatus('Running');
         callApi(values, mode)
             .then(res => {
                 setStatus('Ready');
-                setOutputText(res.replace(/<br[^>]*>/gi, "\n"));
+                setOutputText(res.replace(/<br[^>]*>/gi, "\n> "));
             })
             .catch(err => {
                 setStatus('Error');
@@ -80,9 +79,22 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
     }
 
     return (
-        <Form form={form} name="dynamic_form_nest_item" onFinish={(e) => onFinish(e, form.getFieldValue('simulatorModes'))} autoComplete="off">
-            <Item name="simulatorModes" label="Mode" rules={[{ required: true, message: 'Missing mode' }]}>
-                <Select options={simulatorModes} onChange={handleChange} />
+        <Form
+            form={form}
+            name="dynamic_form_nest_item"
+            onFinish={(e) => onFinish(e, form.getFieldValue('simulatorModes'))}
+            autoComplete="off"
+        >
+            <Item
+                name="simulatorModes"
+                label="Modo"
+                rules={[{ required: true, message: 'No has seleccionado ningún modo.' }]}
+            >
+                <Select
+                    options={simulatorModes}
+                    onChange={handleChange}
+                    allowClear
+                />
             </Item>
             <List name="params">
                 {(fields, { add, remove }) => (
@@ -98,12 +110,16 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
                                     {() => (
                                         <Item
                                             {...field}
-                                            label="Option"
+                                            label="Argumento"
                                             name={[field.name, 'option']}
                                             fieldKey={[field.fieldKey, 'option']}
-                                            rules={[{ required: true, message: 'Missing option' }]}
+                                            rules={[{ required: true, message: 'No has seleccionado ningún argumento.' }]}
                                         >
-                                            <Select disabled={!form.getFieldValue('simulatorModes')} style={{ width: 130 }} onChange={(e) => checkValues(e, form.getFieldValue('simulatorModes'))}>
+                                            <Select
+                                                onChange={(e) => checkValues(e, form.getFieldValue('simulatorModes'))}
+                                                disabled={!form.getFieldValue('simulatorModes')}
+                                                style={{ width: 130 }}
+                                            >
                                                 {(params[form.getFieldValue('simulatorModes')] || []).map(item => (
                                                     <Option key={item.value} value={item.value}>
                                                         {item.label}
@@ -116,12 +132,12 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
                                 {
                                     needValue && <Item
                                         {...field}
-                                        label="Value"
+                                        label="Valor"
                                         name={[field.name, 'value']}
                                         fieldKey={[field.fieldKey, 'value']}
-                                        rules={[{ required: true, message: 'Missing value' }]}
+                                        rules={[{ required: true, message: 'No has seleccionado ningún valor.' }]}
                                     >
-                                        <Input />
+                                        <InputNumber disabled={!form.getFieldValue('simulatorModes')} />
                                     </Item>
                                 }
 
@@ -131,15 +147,15 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
 
                         <Item>
                             <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
-                                Add Params
+                                Agregar parametro
                   </Button>
                         </Item>
                     </>
                 )}
             </List>
             <Item>
-                <Button type="primary" htmlType="submit">
-                    Submit
+                <Button type="primary" shape="round" size='large' htmlType="submit">
+                    Enviar
             </Button>
             </Item>
         </Form>

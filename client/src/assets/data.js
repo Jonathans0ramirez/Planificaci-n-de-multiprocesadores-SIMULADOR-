@@ -3,7 +3,7 @@ import eraser from '../assets/eraser.svg';
 
 export const menuParagraphs = [
     "Integración gráfica del simulador rudimentario de multi-CPU scheduling, multi.py.",
-    "El objetivo de... es mostrar detalladamente los indicadores de la caché y las tareas realizadas, basadas en parametros customizables. Dos modos de simulaciones.",
+    "El objetivo de los dos simuladores desarrolados es mostrar el comportamiento de las caché y las tareas según el comportamiento del Single-Queue Multiprocessor Scheduling (SQMS).",
     "Para ejecutar cada simulación, se tienen dos posibilidades. La primera es dejar que el sistema cree algunas tareas con caracterísiticas aleatorias (predeterminado, sin especificar nada); También existe la posibilidad de manipular estas tareas generadas. La segunda es especificando características claves para que el simulador actúe con más precisión."
 ];
 

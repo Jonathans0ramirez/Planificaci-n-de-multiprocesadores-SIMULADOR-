@@ -23,7 +23,7 @@ const {
 
 const SimulatorBuilder = ({ setStatus, setOutputText }) => {
     const [form] = Form.useForm();
-    const [needValue, setNeedValue] = useState(true);
+    const [needValues, setNeedValue] = useState([]);
 
     const callApi = async ({ params }, mode) => {
         const req = params.filter((value, index, self) =>
@@ -73,9 +73,11 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
         form.setFieldsValue({ params: [] });
     };
 
-    const checkValues = (e, mode) => {
-        const { needValue } = params[mode].find(param => param.value === e);
-        setNeedValue(needValue);
+    const checkValues = (e, mode, field) => {
+        const copyState = [...needValues];
+        const { needValue: nVal } = params[mode].find(param => param.value === e);
+        field.name >= copyState.length ? copyState.splice(field.name, 0, nVal) : copyState.splice(field.key, 1, nVal);
+        setNeedValue(copyState);
     }
 
     return (
@@ -116,7 +118,7 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
                                             rules={[{ required: true, message: 'No has seleccionado ningún argumento.' }]}
                                         >
                                             <Select
-                                                onChange={(e) => checkValues(e, form.getFieldValue('simulatorModes'))}
+                                                onChange={(e) => checkValues(e, form.getFieldValue('simulatorModes'), field)}
                                                 disabled={!form.getFieldValue('simulatorModes')}
                                                 style={{ width: 130 }}
                                             >
@@ -130,7 +132,8 @@ const SimulatorBuilder = ({ setStatus, setOutputText }) => {
                                     )}
                                 </Item>
                                 {
-                                    needValue && <Item
+                                    needValues && needValues.length > 0 && needValues[field.name] &&
+                                    <Item
                                         {...field}
                                         label="Valor"
                                         name={[field.name, 'value']}
